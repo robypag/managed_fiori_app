@@ -1,0 +1,90 @@
+_schema-version: "3.2"
+ID: hcm-sync-log
+description: Fiori elements app
+version: 0.0.1
+modules:
+- name: compaochcmsynclog
+  type: html5
+  path: hcmsynclog
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: hcm-sync-log-deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: hcm-sync-log-html5-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+      - artifacts:
+         - compaochcmsynclog.zip
+        name: compaochcmsynclog
+        target-path: resources/
+- name: hcm-sync-log-destination-content
+  type: com.sap.application.content
+  build-parameters:
+    no-source: true
+  requires:
+    - name: hcm-sync-log-uaa
+      parameters:
+        service-key:
+          name: hcm-sync-log-uaa-key
+    - name: hcm-sync-log-html5-repo-host
+      parameters:
+        service-key:
+          name: hcm-sync-log-html5-repo-host-key
+##    - name: hcm-sync-log-connectivity
+##      parameters:
+##        service-key:
+##         name: hcm-sync-log-connectivity-key
+    - name: hcm-sync-log-destination
+      parameters:
+        content-target: true
+  parameters:
+    content:
+      subaccount:
+        existing_destinations_policy: update
+        destinations:
+          - Name: hcm-sync-log-destination-html5
+            ServiceInstanceName: hcm-sync-log-html5-repo-host
+            ServiceKeyName: hcm-sync-log-html5-repo-host-key
+            sap.cloud.service: cloud.sf
+          - Name: hcm-sync-log-destination-uaa
+            Authentication: OAuth2UserTokenExchange
+            ServiceInstanceName: hcm-sync-log-uaa
+            ServiceKeyName: hcm-sync-log-uaa-key
+            sap.cloud.service: cloud.sf
+resources:
+- name: hcm-sync-log-html5-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: hcm-sync-log-destination
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+##    path: ./destinations.json
+## - name: hcm-sync-log-connectivity
+##  type: org.cloudfoundry.managed-service
+##  parameters:
+##    service: connectivity
+##    service-plan: lite
+- name: hcm-sync-log-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service-plan: application
+    service: xsuaa
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

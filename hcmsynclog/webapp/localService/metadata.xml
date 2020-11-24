@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://ldcik63.wdf.sap.corp:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://ldcik63.wdf.sap.corp:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="YXX_ERP_EC_SYNC_LOG_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="LogHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Lognumber"/>
+                </Key>
+                <Property Name="Lognumber" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Log number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Object" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Object" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Subobject" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:value-list="fixed-values" sap:label="Subobject" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Extnumber" Type="Edm.String" Nullable="false" MaxLength="100" sap:text="Employee" sap:unicode="false" sap:label="External ID" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Employee Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Aldate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Altime" Type="Edm.Time" Nullable="false" Precision="0" sap:display-format="Time" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Aluser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Alchdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:unicode="false" sap:label="Changed on" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Alchtime" Type="Edm.Time" Precision="0" sap:display-format="Time" sap:unicode="false" sap:label="Changed at" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MsgCntAl" Type="Edm.Byte" sap:unicode="false" sap:label="Total Messages" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="MsgCntA" Type="Edm.Byte" sap:unicode="false" sap:label="Terminations" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="MsgCntE" Type="Edm.Byte" sap:unicode="false" sap:label="Error Messages" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="MsgCntW" Type="Edm.Byte" sap:unicode="false" sap:label="No. of Warnings" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="MsgCntI" Type="Edm.Byte" sap:unicode="false" sap:label="Information" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="MsgCntS" Type="Edm.Byte" sap:unicode="false" sap:label="Successful" sap:creatable="false" sap:updatable="false"/>
+                <NavigationProperty Name="Messages" Relationship="YXX_ERP_EC_SYNC_LOG_SRV.ToLogMessages" FromRole="FromRole_ToLogMessages" ToRole="ToRole_ToLogMessages"/>
+            </EntityType>
+            <EntityType Name="LogMessage" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Lognumber"/>
+                    <PropertyRef Name="Msgnumber"/>
+                </Key>
+                <Property Name="Lognumber" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Log number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Msgnumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Message no." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Msgty" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Message Type" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Msgid" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Message Class" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Msgno" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Message Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageText" Type="Edm.String" Nullable="false" MaxLength="2048" sap:unicode="false" sap:label="Message Long Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TimeStmp" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Time stamp" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Criticality" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Criticality" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageLongText" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Message Long Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="LogHeader" Relationship="YXX_ERP_EC_SYNC_LOG_SRV.ToLogMessages" FromRole="ToRole_ToLogMessages" ToRole="FromRole_ToLogMessages"/>
+            </EntityType>
+            <EntityType Name="SubObject" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DomvalueL"/>
+                </Key>
+                <Property Name="DomvalueL" Type="Edm.String" Nullable="false" MaxLength="10" sap:text="Ddtext" sap:unicode="false" sap:label="Lower Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ddtext" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Short Descript." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="ToLogMessages" sap:content-version="1">
+                <End Type="YXX_ERP_EC_SYNC_LOG_SRV.LogHeader" Multiplicity="0..1" Role="FromRole_ToLogMessages"/>
+                <End Type="YXX_ERP_EC_SYNC_LOG_SRV.LogMessage" Multiplicity="*" Role="ToRole_ToLogMessages"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ToLogMessages">
+                        <PropertyRef Name="Lognumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ToLogMessages">
+                        <PropertyRef Name="Lognumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="YXX_ERP_EC_SYNC_LOG_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="LogHeaderSet" EntityType="YXX_ERP_EC_SYNC_LOG_SRV.LogHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LogMessageSet" EntityType="YXX_ERP_EC_SYNC_LOG_SRV.LogMessage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SubObjectSet" EntityType="YXX_ERP_EC_SYNC_LOG_SRV.SubObject" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="ToLogMessageSet" Association="YXX_ERP_EC_SYNC_LOG_SRV.ToLogMessages" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="LogHeaderSet" Role="FromRole_ToLogMessages"/>
+                    <End EntitySet="LogMessageSet" Role="ToRole_ToLogMessages"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="YXX_ERP_EC_SYNC_LOG.LogHeader/MsgCntAl" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Runtime Errors"/>
+            </Annotations>
+            <Annotations Target="YXX_ERP_EC_SYNC_LOG.LogHeader/MsgCntE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Application Errors"/>
+            </Annotations>
+            <Annotations Target="YXX_ERP_EC_SYNC_LOG_SRV.LogHeader" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.ConnectedFields" Qualifier="LogTitle">
+                    <Record>
+                        <PropertyValue Property="Label" String="Log Element"/>
+                        <PropertyValue Property="Template" String="{LogID} - {EmployeeID}"/>
+                        <PropertyValue Property="Data">
+                            <Record>
+                                <PropertyValue Property="LogID">
+                                    <Record Type="UI.DataField">
+                                        <PropertyValue Property="Value" Path="Lognumber"/>
+                                    </Record>
+                                </PropertyValue>
+                                <PropertyValue Property="EmployeeID">
+                                    <Record Type="UI.DataField">
+                                        <PropertyValue Property="Value" Path="Extnumber"/>
+                                    </Record>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Log Element"/>
+                        <PropertyValue Property="TypeNamePlural" String="Log Entries"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Label" String="Log ID"/>
+                                <PropertyValue Property="Value" Path="Lognumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Label" String="Sync. Element"/>
+                                <PropertyValue Property="Value" Path="Extnumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Log ID"/>
+                            <PropertyValue Property="Value" Path="Lognumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sync Object (Empl.ID)"/>
+                            <PropertyValue Property="Value" Path="Extnumber"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="AdministrativeData">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Label" String="Administrative Data"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sync On"/>
+                                    <PropertyValue Property="Value" Path="Aldate"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sync At"/>
+                                    <PropertyValue Property="Value" Path="Altime"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sync By"/>
+                                    <PropertyValue Property="Value" Path="Aluser"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="MessageOverview">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Label" String="Messages Overview"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Total Messages"/>
+                                    <PropertyValue Property="Value" Path="MsgCntAl"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Runtime Errors"/>
+                                    <PropertyValue Property="Value" Path="MsgCntA"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Application Errors"/>
+                                    <PropertyValue Property="Value" Path="MsgCntE"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Application Warnings"/>
+                                    <PropertyValue Property="Value" Path="MsgCntW"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="GeneralInformation"/>
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="AdministrativeData"/>
+                            <PropertyValue Property="Label" String="Administrative Data"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#AdministrativeData"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="MessageOverview"/>
+                            <PropertyValue Property="Label" String="Messages Overview"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#MessageOverview"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="MessageList"/>
+                            <PropertyValue Property="Label" String="Errors and Messages"/>
+                            <PropertyValue Property="Target" AnnotationPath="Messages/@UI.LineItem"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Log ID"/>
+                            <PropertyValue Property="Value" Path="Lognumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sync Object"/>
+                            <PropertyValue Property="Value" Path="Object"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sync SubObject"/>
+                            <PropertyValue Property="Value" Path="Subobject"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sync Element (Empl.ID)"/>
+                            <PropertyValue Property="Value" Path="Extnumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Log Date"/>
+                            <PropertyValue Property="Value" Path="Aldate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Log Time"/>
+                            <PropertyValue Property="Value" Path="Altime"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Total Number of Messages"/>
+                            <PropertyValue Property="Value" Path="MsgCntAl"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Runtime Errors"/>
+                            <PropertyValue Property="Value" Path="MsgCntA"/>
+                            <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Application Errors"/>
+                            <PropertyValue Property="Value" Path="MsgCntE"/>
+                            <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Application Warnings"/>
+                            <PropertyValue Property="Value" Path="MsgCntW"/>
+                            <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Critical"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Information Messages"/>
+                            <PropertyValue Property="Value" Path="MsgCntI"/>
+                            <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Success Messages"/>
+                            <PropertyValue Property="Value" Path="MsgCntS"/>
+                            <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Subobject</PropertyPath>
+                        <PropertyPath>Extnumber</PropertyPath>
+                        <PropertyPath>Aldate</PropertyPath>
+                        <PropertyPath>Altime</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="SyncIn">
+                    <Record>
+                        <PropertyValue Property="Text" String="Employee Central to ERP"/>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="Object"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="ECPAO_IN"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="SyncOut">
+                    <Record>
+                        <PropertyValue Property="Text" String="ERP to Employee Central"/>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="Object"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="ECPAO"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="LogChart">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="Title" String="Logs by Errors"/>
+                        <PropertyValue Property="Description" String="Logs ranked by number of errors"/>
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/HeatMap"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>Aldate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>MsgCntE</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="SyncInLogByErrors">
+                    <Record>
+                        <PropertyValue Property="Text" String="EC to ERP By Errors"/>
+                        <PropertyValue Property="SelectionVariant">
+                            <Record>
+                                <PropertyValue Property="Text" String="EC to ERP By Errors"/>
+                                <PropertyValue Property="SelectOptions">
+                                    <Collection>
+                                        <Record Type="UI.SelectOptionType">
+                                            <PropertyValue Property="PropertyName" PropertyPath="Object"/>
+                                            <PropertyValue Property="Ranges">
+                                                <Collection>
+                                                    <Record Type="UI.SelectionRangeType">
+                                                        <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                        <PropertyValue Property="Low" String="ECPAO_IN"/>
+                                                    </Record>
+                                                </Collection>
+                                            </PropertyValue>
+                                        </Record>
+                                        <Record Type="UI.SelectOptionType">
+                                            <PropertyValue Property="PropertyName" PropertyPath="Subobject"/>
+                                            <PropertyValue Property="Ranges">
+                                                <Collection>
+                                                    <Record Type="UI.SelectionRangeType">
+                                                        <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                        <PropertyValue Property="Low" String="EE"/>
+                                                    </Record>
+                                                </Collection>
+                                            </PropertyValue>
+                                        </Record>
+                                    </Collection>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="PresentationVariant">
+                            <Record>
+                                <PropertyValue Property="Visualizations">
+                                    <Collection>
+                                        <AnnotationPath>@UI.Chart#LogChart</AnnotationPath>
+                                    </Collection>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="YXX_ERP_EC_SYNC_LOG_SRV.LogMessage" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Log ID"/>
+                            <PropertyValue Property="Value" Path="Lognumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Message ID"/>
+                            <PropertyValue Property="Value" Path="Msgnumber"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Message ID"/>
+                            <PropertyValue Property="Value" Path="Msgnumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Message Type"/>
+                            <PropertyValue Property="Value" Path="Msgty"/>
+                            <PropertyValue Property="Criticality" Path="Criticality"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Message Number"/>
+                            <PropertyValue Property="Value" Path="Msgno"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Message Area"/>
+                            <PropertyValue Property="Value" Path="Msgid"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Message Text"/>
+                            <PropertyValue Property="Value" Path="MessageText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Timestamp"/>
+                            <PropertyValue Property="Value" Path="TimeStmp"/>
+                        </Record>
+                    </Collection>
+                    <Annotation Term="UI.Criticality" Path="Criticality"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="YXX_ERP_EC_SYNC_LOG_SRV.LogHeader/Subobject" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Sub Object"/>
+                        <PropertyValue Property="CollectionPath" String="SubObjectSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Subobject"/>
+                                    <PropertyValue Property="ValueListProperty" String="DomvalueL"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" PropertyPath="Ddtext"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://ldcik63.wdf.sap.corp:44333/sap/opu/odata/sap/YXX_ERP_EC_SYNC_LOG_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://ldcik63.wdf.sap.corp:44333/sap/opu/odata/sap/YXX_ERP_EC_SYNC_LOG_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
