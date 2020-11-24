@@ -6,7 +6,7 @@
 |**Generation Platform**<br>Visual Studio Code|
 |**Floorplan Used**<br>List Report Object Page V2|
 |**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>https://ldcik63.wdf.sap.corp:44333/sap/opu/odata/sap/YXX_ERP_EC_SYNC_LOG_SRV/|
+|**Service URL**<br>https://vhldcik63.wdf.sap.corp:50033/sap/opu/odata/sap/YXX_ERP_EC_SYNC_LOG_SRV/|
 |**Main Entity**<br>LogHeaderSet|
 |**Navigation Entity**<br>Messages|
 |**Module Name**<br>hcmsynclog|
