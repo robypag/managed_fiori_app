@@ -2,7 +2,7 @@
     "_version": "1.8.0",
     "sap.cloud": {
         "service": "cloud.sf"
-    },    
+    },
     "sap.app": {
         "id": "com.paoc.hcmsynclog",
         "type": "application",
@@ -18,7 +18,7 @@
         "resources": "resources.json",
         "dataSources": {
             "mainService": {
-                "uri": "/sap/opu/odata/sap/YXX_ERP_EC_SYNC_LOG_SRV/",
+                "uri": "sap/opu/odata/sap/YXX_ERP_EC_SYNC_LOG_SRV/",
                 "type": "OData",
                 "settings": {
                     "annotations": [
